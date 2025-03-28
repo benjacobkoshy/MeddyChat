@@ -1,0 +1,159 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hi
+    - Hello
+    - Hey there
+    - Hey!
+    - Hi, how are you?
+    - Good morning
+    - Good afternoon
+    - Good evening
+    - My name is {name}.
+    - I'm {name}.
+    - Hello, I am {name}.
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - See you later
+    - Goodbye
+    - Take care
+    - See you soon
+    - Have a great day
+    - Bye for now
+    - Talk to you later
+    - See ya
+    - Later
+
+- intent: bot_challenge
+  examples: |
+    - Who are you?
+    - What are you?
+    - Are you a bot?
+    - Are you real?
+    - Tell me who you are
+    - Can you tell me about yourself?
+    - Which model are you based on?
+    - What AI powers you?
+    - Are you a human?
+    - What is your name?
+    - How were you created?
+    - Who made you?
+
+- intent: provide_personal_info
+  examples: |
+    - My name is [Ramu](name). My medical history: [Diabetes](medical_history).
+    - I'm [John](name), and I have [Asthma](medical_history).
+    - My name is [Alex](name). I have a history of [High Blood Pressure](medical_history).
+    - I am [Sarah](name), and I suffer from [Migraine](medical_history).
+    - [James](name) here. I have been diagnosed with [Hypertension](medical_history).
+
+- intent: thank_you
+  examples: |
+    - Thank you
+    - Thanks a lot
+    - Appreciate it
+    - Thank you so much
+    - Thanks
+    - Thanks for the help
+    - Thanks, that was helpful
+    - Many thanks
+    - Thanks, I appreciate it
+    - Thank you kindly
+
+- intent: confirm_yes
+  examples: |
+    - Yes
+    - Sure
+    - Okay
+    - Absolutely
+    - Yep
+    - Yeah
+    - Of course
+    - Definitely
+    - That's right
+    - Sure thing
+
+- intent: confirm_no
+  examples: |
+    - No
+    - Not now
+    - Maybe later
+    - Nope
+    - I don't think so
+    - No, thanks
+    - Nah
+    - Not really
+    - I'd rather not
+    - I don't want to
+
+- intent: out_of_scope
+  examples: |
+    - I have headache and fever. What disease could this be?
+    - Can you diagnose my symptoms?
+    - What could be causing my fever and cough?
+    - I'm feeling nauseous and have stomach pain. What could it be?
+    - I have a sore throat and fever. Do you know what illness this is?
+    - What disease matches these symptoms: chills, fatigue, and muscle pain?
+    - I have a headache
+    - My head is throbbing
+    - I'm feeling nauseous
+    - I have fever and cough
+    - My throat is sore
+    - I feel dizzy and have blurred vision
+    - I'm suffering from chest pain
+    - My body is aching
+    - I have a runny nose and sneezing
+    - My stomach hurts
+    - I have a sharp pain in my chest
+    - I feel weak and fatigued
+    - I'm having trouble breathing
+    - My back is hurting a lot
+    - I have severe joint pain
+    - My skin is itching and red
+    - I feel like vomiting
+    - My ears are hurting
+
+
+- intent: request_appointment
+  examples: |
+    - I want to book an appointment
+    - I need to see a doctor
+    - I'd like to schedule a consultation
+    - Can I get an appointment?
+    - I want to see a physician
+    - Schedule a medical checkup
+    - Can I visit a doctor?
+    - I want to make an appointment for a checkup
+
+- intent: inform_specialization
+  examples: |
+    - I need a [dentist](specialization)
+    - Find me a [cardiologist](specialization)
+    - I am looking for an [orthopedic](specialization)
+    - Can you recommend a [neurologist](specialization)?
+    - I want to see a [gynecologist](specialization)
+    - Book me with an [ENT specialist](specialization)
+    - Do you have a [pediatrician](specialization)?
+    - I'd like a consultation with a [dermatologist](specialization)
+    - Are there any available [psychiatrists](specialization)?
+    - I need a [general physician](specialization)
+    - I need a [urologist](specialization)
+    - Find me an [oncologist](specialization)
+
+- intent: book_appointment
+  examples: |
+    - I want to book an appointment with Dr. Ben Jacob Koshy
+    - Book me an appointment with [Ben Jacob Koshy](doctor_name)
+    - Schedule a visit to [Dr. Ben Jacob Koshy](doctor_name)
+    - Can I see [Dr. Koshy](doctor_name) this week?
+    - I need an appointment with [Dr. Alex Thomas](doctor_name)
+    - Can you book me with [Dr. Sarah Wilson](doctor_name)?
+    - Schedule a check-up with [Dr. Daniel Lee](doctor_name)
+    - I want to meet [Dr. Emily Johnson](doctor_name) tomorrow
+    - When is [Dr. Smith](doctor_name) available?
+    - Can I schedule a call with [Dr. Robert Brown](doctor_name)?
+    - Please set up a meeting with [Dr. Richard](doctor_name)

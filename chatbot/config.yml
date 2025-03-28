@@ -1,0 +1,40 @@
+# The config recipe.
+recipe: default.v1
+
+# The assistant project unique identifier
+assistant_id: 20241009-214907-asymptotic-hue
+
+# Configuration for Rasa NLU
+language: en
+
+pipeline:
+  - name: WhitespaceTokenizer  # Splits the user input into words
+  - name: RegexFeaturizer      # Detects patterns in the input (useful for extracting entities)
+  - name: LexicalSyntacticFeaturizer  # Extracts syntactic features such as prefixes and suffixes
+  - name: CountVectorsFeaturizer  # Converts the text into feature vectors
+  - name: CountVectorsFeaturizer  # Adds additional character-level feature vectors for better text understanding
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier  # A powerful classifier that supports intent classification and entity recognition
+    epochs: 100
+    constrain_similarities: true
+  - name: EntitySynonymMapper  # Maps different words to the same entity (e.g., "fever" = "temperature")
+  - name: ResponseSelector  # Helps in selecting the appropriate bot response for a given user query
+    epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier  # A fallback mechanism when the bot can't understand the intent
+    threshold: 0.3
+    ambiguity_threshold: 0.1
+
+# Configuration for Rasa Core
+policies:
+  - name: MemoizationPolicy  # Helps remember the next step based on historical conversations
+  - name: RulePolicy  # Allows the bot to follow pre-defined rules (good for handling FAQ-like queries)
+  - name: UnexpecTEDIntentPolicy  # Helps the bot handle unexpected intents gracefully
+    max_history: 5
+    epochs: 100
+  - name: TEDPolicy  # A transformer-based policy that helps predict the next action dynamically
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true

@@ -1,0 +1,54 @@
+version: "3.1"
+
+rules:
+
+- rule: Greet user and fetch data
+  steps:
+    - intent: greet
+    - action: action_fetch_user_data
+    - action: utter_greet_user
+
+# - rule: Save user info from input
+#   steps:
+#     - intent: provide_personal_info
+#     - slot_was_set:
+#         - user_name: "{name}"
+#         - medical_history: "{medical_history}"
+#     - action: utter_greet_user
+
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- rule: Handle goodbyes
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Redirect all other queries to Gemini AI
+  steps:
+    - intent: out_of_scope
+    - action: action_gemini_chat
+
+- rule: Handle thank you messages
+  steps:
+    - intent: thank_you
+    - action: utter_thank_you
+
+- rule: Handle fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_fallback
+
+
+- rule: Handle appointment booking
+  steps:
+    - intent: request_appointment
+    - action: utter_ask_specialization
+
+- rule: Handle doctor selection
+  steps:
+    - intent: choose_doctor
+    - action: action_redirect_to_doctor_interface

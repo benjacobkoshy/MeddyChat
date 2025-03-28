@@ -1,0 +1,13 @@
+{
+  "0": "book_appointment",
+  "1": "bot_challenge",
+  "2": "confirm_no",
+  "3": "confirm_yes",
+  "4": "goodbye",
+  "5": "greet",
+  "6": "inform_specialization",
+  "7": "out_of_scope",
+  "8": "provide_personal_info",
+  "9": "request_appointment",
+  "10": "thank_you"
+}

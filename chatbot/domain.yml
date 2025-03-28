@@ -1,0 +1,142 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - inform_specialization
+  - request_appointment
+  - confirm_yes
+  - confirm_no
+  - out_of_scope
+  - thank_you
+  - choose_doctor
+  - bot_challenge
+  - book_appointment
+  - provide_personal_info
+
+entities:
+  - specialization
+  - doctor_name
+  - doctor_id  # Added doctor_id as an entity
+
+slots:
+  specialization:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: specialization
+
+  doctor_list:
+    type: list
+    mappings:
+      - type: custom  # Set by a custom action
+
+  formatted_doctor_list:
+    type: text
+    mappings:
+      - type: custom  # Set by a custom action
+
+  doctor_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: doctor_name
+  
+  doctor_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom  # Set by a custom action when user selects a doctor
+
+  doctor_dict:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom  # Set by a custom action
+
+
+  user_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom  
+
+  user_gender:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom  
+
+  previous_diagnoses:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: custom  
+
+  medical_history:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: custom  
+
+forms:
+  appointment_form:
+    required_slots:
+      - specialization
+      - doctor_name
+      - doctor_id  # Added doctor_id to ensure it's collected
+
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+  
+  utter_greet_user:
+    - text: "Hello {user_name}, how can I assist you today?"
+
+  utter_goodbye:
+    - text: "Goodbye! Take care."
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Meddy."
+
+  utter_ask_specialization:
+    - text: "Which type of specialist are you looking for? (e.g., Cardiologist, Dermatologist, General Physician)"
+
+
+
+  utter_ask_doctor:
+    - condition:
+        - type: slot
+          name: doctor_list
+          value: null
+      text: "Sorry, no {specialization} specialists found."
+
+    - text: |
+        Here are available {specialization} specialists near you:
+        {formatted_doctor_list}
+        Please select a doctor from the list.
+
+
+  utter_confirm_doctor_selection:
+    - text: "You've selected Dr. {doctor_name}. Redirecting you to their interface..."
+
+  utter_thank_you:
+    - text: "You're welcome! Happy to help. 😊"
+    - text: "Anytime! Let me know if you need anything else."
+    - text: "Glad I could assist! Have a great day!"
+
+  utter_fallback:
+    - text: "I'm not sure how to respond to that. Can you explain it!."
+
+actions:
+  - action_fetch_user_data
+  - action_gemini_chat
+  - action_book_appointment
+  - action_fetch_doctors
+  - action_redirect_to_doctor_interface
+
+
+session_config:
+  session_expiration_time: 5  # Session expires after 5 minutes of inactivity
+  carry_over_slots_to_new_session: false  # Do not carry slot values across sessions

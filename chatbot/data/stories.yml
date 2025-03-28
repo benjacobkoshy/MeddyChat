@@ -1,0 +1,37 @@
+version: "3.1"
+
+stories:
+- story: User confirms with yes
+  steps:
+    - intent: confirm_yes
+    - action: action_gemini_chat
+
+- story: User declines with no
+  steps:
+    - intent: confirm_no
+    - action: action_gemini_chat
+
+- story: User requests an appointment
+  steps:
+    - intent: request_appointment
+    - action: utter_ask_specialization
+    - intent: inform_specialization
+      entities:
+        - specialization: "dentist"
+    - action: action_fetch_doctors
+    # - action: utter_ask_doctor  # Ensures chatbot asks users to choose a doctor
+    - intent: choose_doctor
+      entities:
+        - doctor_name: "Ben Jacob Koshy"
+    - slot_was_set:
+        - doctor_name: "Ben Jacob Koshy"
+    - action: action_redirect_to_doctor_interface
+
+- story: User selects a doctor
+  steps:
+    - intent: choose_doctor
+      entities:
+        - doctor_name: "Ben Jacob Koshy"
+    - slot_was_set:
+        - doctor_name: "Ben Jacob Koshy"
+    - action: action_redirect_to_doctor_interface
